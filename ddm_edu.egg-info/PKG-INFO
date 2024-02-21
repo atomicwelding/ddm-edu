@@ -1,0 +1,14 @@
+Metadata-Version: 2.1
+Name: ddm-edu
+Version: 1.0.0
+Summary: DDM microscopy package for educational purpose.
+Author: Erwan Le Doeuff, weld
+Author-email: <erwan.le-doeuff@etu.umontpellier.fr>
+Keywords: python,ddm,microscopy
+Classifier: Intended Audience :: Education
+Classifier: Programming Language :: Python :: 3
+Classifier: Operating System :: MacOS :: MacOS X
+Requires-Dist: numpy
+Requires-Dist: tifffile
+
+DDM microscopy package for educational purpose. For an efficient software solution, see simd-ddm.

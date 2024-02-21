@@ -1,0 +1,10 @@
+README.md
+setup.py
+ddm_edu.egg-info/PKG-INFO
+ddm_edu.egg-info/SOURCES.txt
+ddm_edu.egg-info/dependency_links.txt
+ddm_edu.egg-info/requires.txt
+ddm_edu.egg-info/top_level.txt
+src/__init__.py
+src/libddm.so
+src/package.py
