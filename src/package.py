@@ -42,13 +42,13 @@ class DDM:
 # example
 
 # load image
-image = imread('test.tif')
-t,y,x = image.shape
+#image = imread('test.tif')
+#t,y,x = image.shape
 
 
 # compute ddm
-stack = image.reshape((y,x,t)).astype(np.double)
-ddmstack = DDM(stack, 40, 0.07).compute()
+#stack = image.reshape((y,x,t)).astype(np.double)
+#ddmstack = DDM(stack, 40, 0.07).compute()
 
 # write file
-imwrite("output.tif", ddmstack)
+#imwrite("output.tif", ddmstack)
