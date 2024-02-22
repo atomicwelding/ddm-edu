@@ -1,12 +1,13 @@
 import numpy as np
-from ctypes import CDLL c_int
+from ctypes import CDLL, c_int
 from tifffile import imwrite, imread
-
+import matplotlib.pyplot as plt 
+import scipy.fft as fastft
 class DDM:
     def  __init__(self, stack, Ndelays, mean_sampling_time):
         self.dim = stack.shape
 
-        if Ndelays >= self.dim[-1] :
+        if Ndelays >= self.dim[0] :
             print("Ndelays should be stricly lesser than the number of images")
 
         self.Ndelays = Ndelays
@@ -15,10 +16,8 @@ class DDM:
 
         
         print("FFT transform ...")
-        self.fft = np.fft.fftn(stack).astype(np.complex128).ravel()
-
-        print(self.fft)
-
+        self.fft = fastft.fftn(stack, axes=(1,2), workers=-1).astype(np.complex128)
+        
         # checker si la lib est là, sinon erreur
         libddm = CDLL("libddm.so")
         self.c_computeDDM = libddm.computeDDM
@@ -31,24 +30,37 @@ class DDM:
         
 
     def compute(self):
-        ddm = np.zeros((self.dim[1], self.dim[0], self.Ndelays), dtype=np.double).ravel()
+        ddm_dim = (self.Ndelays, self.dim[1], self.dim[-1])
+        ddm = np.zeros(ddm_dim, dtype=np.double)
         print("Computing DDM ...")
-        self.c_computeDDM(self.dim[-1],
-                          self.dim[1], self.dim[0],
-                          self.fft, ddm,
+        self.c_computeDDM(self.dim[0],
+                          self.dim[-1], self.dim[1],
+                          self.fft.ravel(), ddm.ravel(),
                           self.Ndelays, self.index_delays)
-        return ddm.reshape((self.Ndelays,self.dim[1],self.dim[0]))
+        
+        return fastft.fftshift(ddm.reshape(ddm_dim), axes=(1,2))
 
 # example
 
 # load image
-#image = imread('test.tif')
-#t,y,x = image.shape
+image = imread('sample.tif')
 
 
 # compute ddm
-#stack = image.reshape((y,x,t)).astype(np.double)
-#ddmstack = DDM(stack, 40, 0.07).compute()
+stack = image.astype(np.double)
+ddmstack = DDM(stack, 300, 0.07)
+result = ddmstack.compute()
 
 # write file
-#imwrite("output.tif", ddmstack)
+imwrite("output.tif", result)
+
+plt.plot(ddmstack.delays, result[:,256,256], 'k')
+plt.plot(ddmstack.delays, result[:,256,258], 'r')
+plt.plot(ddmstack.delays, result[:,256,260], 'orange')
+
+plt.legend(["(256,256)", "(256,258)", "(256,260)"])
+plt.xlabel(r"$\tau (s)$")
+plt.ylabel("Signal intensity")
+plt.title("Brownian motion of colloidal particles")
+plt.grid()
+plt.show()

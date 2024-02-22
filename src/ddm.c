@@ -1,6 +1,6 @@
 // by weld
-// - fft (let python do it?) ---> yes
-// - ddm 
+// - revérifier l'algo
+// - recalculer avec simdddm, en linspace
 
 #include <complex.h>
 #include <math.h>
