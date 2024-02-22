@@ -1,6 +1,6 @@
 # ddm-edu
 
-DDM python Package for educational purposes. Refer to simd-ddm for efficient DDM software.
+DDM python package for educational purposes. Refer to simd-ddm for efficient DDM software.
 
 # usage
 
