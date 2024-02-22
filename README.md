@@ -4,6 +4,8 @@ DDM Python package for educational purpose. See simd-ddm for efficient ddm softw
 # usage
 
 ```py
+import numpy as np
+from tifffile import imwrite, imread
 # load image
 image = imread('sample.tif')
 
