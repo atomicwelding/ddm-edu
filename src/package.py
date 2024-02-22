@@ -1,8 +1,15 @@
+"""
+  The code belongs to Erwan Le Doeuff (weld).
+  Feel free to contact me, erwan.le-doeuff AT etu.umontpellier.fr
+"""
+
 import numpy as np
-from ctypes import CDLL, c_int
-from tifffile import imwrite, imread
-import matplotlib.pyplot as plt 
 import scipy.fft as fastft
+from ctypes import CDLL, c_int
+import matplotlib.pyplot as plt
+from tifffile import imwrite, imread
+
+
 class DDM:
     def  __init__(self, stack, Ndelays, mean_sampling_time):
         self.dim = stack.shape
@@ -39,28 +46,3 @@ class DDM:
                           self.Ndelays, self.index_delays)
         
         return fastft.fftshift(ddm.reshape(ddm_dim), axes=(1,2))
-
-# example
-
-# load image
-image = imread('sample.tif')
-
-
-# compute ddm
-stack = image.astype(np.double)
-ddmstack = DDM(stack, 300, 0.07)
-result = ddmstack.compute()
-
-# write file
-imwrite("output.tif", result)
-
-plt.plot(ddmstack.delays, result[:,256,256], 'k')
-plt.plot(ddmstack.delays, result[:,256,258], 'r')
-plt.plot(ddmstack.delays, result[:,256,260], 'orange')
-
-plt.legend(["(256,256)", "(256,258)", "(256,260)"])
-plt.xlabel(r"$\tau (s)$")
-plt.ylabel("Signal intensity")
-plt.title("Brownian motion of colloidal particles")
-plt.grid()
-plt.show()

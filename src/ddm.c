@@ -1,11 +1,12 @@
-// by weld
-// - revérifier l'algo
-// - recalculer avec simdddm, en linspace
-
+/*
+  The code belongs to Erwan Le Doeuff (weld).
+  Feel free to contact me, erwan.le-doeuff AT etu.umontpellier.fr
+*/
 #include <complex.h>
 #include <math.h>
-#include <stdio.h>
+
 #include <omp.h>
+#include <stdio.h>
 
 typedef double _Complex cmplx;
 
