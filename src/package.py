@@ -6,7 +6,6 @@
 import numpy as np
 import scipy.fft as fastft
 from ctypes import CDLL, c_int
-import matplotlib.pyplot as plt
 from tifffile import imwrite, imread
 
 
