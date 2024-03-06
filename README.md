@@ -2,7 +2,7 @@
 
 DDM python package for educational purposes. Refer to simd-ddm for efficient DDM software.
 
-# Install
+# install
 
 Install the necessary tools to compile some c. Install `libomp`. 
 Pull the repo and execute the following commands:
