@@ -19,3 +19,5 @@ result = ddmstack.compute()
 imwrite("output.tif", result)
 ```
 
+To see a better example, check out the jupyter notebook.
+
