@@ -12,7 +12,7 @@ cd src
 make
 ```
 
-Be aware that you may need to modify the `Makefile` in order to build `libddm`, as it depends on your platform. Feel free to contact me if needed.
+Beware that you may need to modify the `Makefile` in order to build `libddm`, as it depends on your platform. Feel free to contact me if needed.
 
 
 # usage
@@ -34,4 +34,5 @@ imwrite("output.tif", result)
 ```
 
 To see a better example, check out the jupyter notebook.
+
 
