@@ -26,7 +26,7 @@ image = imread('sample.tif')
 
 # compute ddm
 stack = image.astype(np.double)
-ddmstack = DDM(stack, 300, 0.07)
+ddmstack = DDM(stack = stack, Ndelays = 300,  mean_sampling_time = 0.07) 
 result = ddmstack.compute()
 
 # write file
